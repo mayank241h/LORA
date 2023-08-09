@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+        /* font-family:Georgia, 'Times New Roman', Times, serif;  */
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        
+        flex-direction: column;
+    }
+
+    .container {
+        border: 2px solid white;
+        border-radius: 13px;
+        height: 80vh;
+        width: 30vw;
+        display: flex;
+        /* justify-content: center; */
+        flex-direction: column;
+        margin: auto;
+        position: relative;
+    }
+
+    #heading {
+        /* font-family: monospace; */
+        font-size: 1.2rem;
+        width: 100%;
+        height: 20vh;
+        /* border: 2px solid red; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .detail>h3,
+    .detail>p {
+        display: inline;
+    }
+
+    #deviceInfo {
+        /* border: 2px solid blue; */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        /* align-items: center; */
+        padding: 12px;
+        font-family: monospace;
+    }
+
+    #map {
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        /* border: 2px solid green; */
+    }
+
+    #map>button {
+        width: 40%;
+        padding: 5px;
+        font-family: monospace;
+        background: transparent;
+        outline: none;
+        border: 1px solid white;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    #Dimg {
+        position: absolute;
+        left: 50%;
+    }
+
+    #Dimg>img {
+        width: 10vw;
+    }
+
+    #Sat {
+        position: absolute;
+        width: 10vw;
+        top: 20%;
+        left: 20%;
+    }
+
+    #loRa {
+        position: absolute;
+        height: 20vh;
+        bottom: 20%;
+        left: 12%;
+
+    }
+
+    #wifi {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .container {
+        background: url('vit.gif') no-repeat center center/cover;
+        -webkit-box-shadow: 10px 10px 11px 0px rgba(255,255,255,1);
+-moz-box-shadow: 10px 10px 11px 0px rgba(255,255,255,1);
+box-shadow: 10px 10px 11px 0px rgba(255,255,255,1);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div id="heading">
+            <h1>DEVICE INFO</h1>
+        </div>
+
+        <div id="deviceInfo">
+            <div class="detail">
+                <h3>Device Name :</h3>
+                <p>LoRa 433</p>
+            </div>
+            <div class="detail">
+                <h3>RSSI :</h3>
+                <p id="rssi">1</p>
+            </div>
+            <div class="detail">
+                <h3>Latitude :</h3>
+                <p id="lat">1</p>
+            </div>
+            <div class="detail">
+                <h3>Longitutde :</h3>
+                <p id="log">1</p>
+            </div>
+            <div id="Dimg">
+                <img src="lora.png" alt="">
+            </div>
+        </div>
+        <div id="map">
+            <button id="mapbtn">Open Map</button>
+            <button>Back to Homepage</button>
+        </div>
+    </div>
+
+</body>
+<script>
+
+    let rssi = document.getElementById('rssi')
+    let lat = document.getElementById('lat')
+    let log = document.getElementById('log')
+
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC-ZVm6xE6JJ35y9_P_PIJM28WI2YAfeiI",
+        authDomain: "bright-shark.firebaseapp.com",
+        databaseURL: "https://bright-shark-default-rtdb.firebaseio.com",
+        projectId: "bright-shark",
+        storageBucket: "bright-shark.appspot.com",
+        messagingSenderId: "132356090033",
+        appId: "1:132356090033:web:009913014ec39f734f9a90",
+        measurementId: "G-37BHSPBBYN"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var ref = firebase.database().ref();
+
+    ref.on("value", function (snapshot) {
+        console.log(snapshot.val());
+        var arr = []
+        arr = snapshot.val();
+        for (i in arr.RSSI_433Mhz) {
+            console.log(arr.RSSI_433Mhz[i])
+            rssi.innerText = arr.RSSI_433Mhz[i]
+        }
+        let a = 0
+        for (i in arr.GPS) {
+            console.log(arr.GPS[i])
+            if (a == 0) {
+                lat.innerText = arr.GPS[i]
+            }
+            else if (a == 1) {
+                log.innerText = arr.GPS[i]
+            }
+            a++
+        }
+
+    }
+    );
+
+    let mapbtn = document.getElementById('mapbtn')
+    mapbtn.addEventListener('click', () => {
+        window.location.href = "./location.html";
+    })
+</script>
+
+</html>

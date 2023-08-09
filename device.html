@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            background: url('naps.gif') center center/cover;
+        }
+
+        #head {
+            margin-top: 30px;
+            position: relative;
+            bottom: 25px;
+            font-size: 4rem;
+            font-family: monospace;
+        }
+
+        .lora>img {
+            width: 10vw;
+        }
+
+        .lora>img:hover {
+            filter: drop-shadow(2px 2px 6px #ffffff);
+        }
+
+        .container {
+            width: 20vw;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            /* border: 2px solid red; */
+        }
+
+        .lora {
+            /* border: 2px solid blue; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lora>p {
+            font-family: monospace;
+            font-size: large;
+
+        }
+
+        @media (max-width:600px) {
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                height: 100vh;
+            }
+
+            #head {
+                position: relative;
+                bottom: 25px;
+                font-size: 3rem;
+                font-family: monospace;
+            }
+
+            .lora>img {
+                width: 30vw;
+                filter: drop-shadow(8px 7px 4px #000000);
+            }
+
+            .lora>img:hover {
+                filter: drop-shadow(10px 9px 6px #000000);
+            }
+
+            .container {
+                width: 20vw;
+                height: 80vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                /* border: 2px solid red; */
+            }
+
+            .lora {
+                /* border: 2px solid blue; */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .lora>p {
+                font-family: monospace;
+                font-size: large;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="head">DEVICE LIST</h1>
+    <div class="container">
+        <div class="lora">
+            <img src="lora.png" alt="" id="device">
+            <p>Device No. 1</p>
+        </div>
+        <div class="lora">
+            <img src="lora.png" alt="" id="device2">
+            <p>Device No. 2</p>
+        </div>
+    </div>
+</body>
+<script>
+    let redir = document.getElementById('device')
+    redir.addEventListener('click', () => {
+        window.location.href = "./data.html";
+    })
+
+    //Currently we are heving two different data file soon we will have one as we store the data from here in local storage
+
+    let redir2 = document.getElementById('device2')
+    redir2.addEventListener('click', () => {
+        window.location.href = "./data2.html";
+    })
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyC-ZVm6xE6JJ35y9_P_PIJM28WI2YAfeiI",
+    //     authDomain: "bright-shark.firebaseapp.com",
+    //     databaseURL: "https://bright-shark-default-rtdb.firebaseio.com",
+    //     projectId: "bright-shark",
+    //     storageBucket: "bright-shark.appspot.com",
+    //     messagingSenderId: "132356090033",
+    //     appId: "1:132356090033:web:009913014ec39f734f9a90",
+    //     measurementId: "G-37BHSPBBYN"
+    // };
+
+    // // Initialize Firebase
+    // firebase.initializeApp(firebaseConfig);
+    // var ref = firebase.database().ref();
+    // const btn = document.getElementById('login')
+    // let uname = document.getElementById('uname')
+    // let pass = document.getElementById('pass')
+    // let a = 0
+    // btn.addEventListener('click', () => {
+
+    //     ref.on("value", function (snapshot) {
+    //         console.log(snapshot.val());
+    //         var arr = []
+    //         arr = snapshot.val();
+    //         for (let i in arr.Data) {
+    //             if (arr.Data[i].pass == pass.value && arr.Data[i].uname == uname.value) {
+    //                 alert("hi pass" + a)
+    //                 setTimeout(() => {
+    //                     // console.log("Delayed for 1 second.");
+    //                 }, "2000");
+    //                 window.location.href = "./device.html";
+
+    //             }
+    //         }
+    //     });
+    // })
+
+
+</script>
+
+</html>

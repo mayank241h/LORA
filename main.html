@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* border: 2px solid red; */
+    }
+
+    body {
+        height: 100vh;
+        background: url('g.gif') no-repeat center center/ cover;
+    }
+
+    .container {
+        width: 30vw;
+        height: 80vh;
+        border: 2px solid white;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        display: flex;
+        flex-direction: column;
+        color: white;
+        font-family: monospace;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: auto;
+        position: relative;
+        top: 50px;
+        border-radius: 15px;
+
+    }
+
+    .dimesions {
+        height: 30vh;
+        width: 100%;
+    }
+
+    #heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #heading>h1 {
+        font-size: 1.7rem;
+    }
+
+    #heading>p {
+        font-size: 1.2rem;
+    }
+
+    #logs {
+        /* border: 2px solid red; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    #logs>input {
+        width: 80%;
+        height: 50px;
+        font-size: 15px;
+        color: #040404;
+        border: none;
+        border-radius: 10px;
+        padding: 7px 45px 0 20px;
+        background: rgba(224, 223, 223, 0.6);
+        backdrop-filter: blur(2px);
+        outline: none;
+
+    }
+
+    #logs>input::placeholder {
+        color: white;
+    }
+
+
+    #submit {
+        /* border: 2px solid red; */
+        display: flex;
+        justify-content: center;
+    }
+
+    #submit>button {
+        position: relative;
+        top: 30px;
+        width: 30%;
+        height: 30px;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+        border-radius: 10px;
+        background: #f78a16;
+        color: #fff;
+        box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.145);
+        cursor: pointer;
+        transition: .4s;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div id="heading" class="dimesions">
+            <h1>Hello, Again</h1>
+            <p>We are happy to see you back.</p>
+        </div>
+        <div id="logs" class="dimesions">
+            <input type="text" name="username" id="uname" placeholder="Enter Username">
+            <input type="password" name="password" id="pass" placeholder="Enter Password">
+        </div>
+        <div id="submit" class="dimesions">
+            <button id="login">Login</button>
+        </div>
+    </div>
+</body>
+<script>
+
+    const btn = document.getElementById('login')
+    let uname = document.getElementById('uname')
+    let pass = document.getElementById('pass')
+    const firebaseConfig = {
+        apiKey: "AIzaSyBL3MmOOBSoohMIuBIJsWCCPaXWvmlDjgk",
+        authDomain: "kavach-3b941.firebaseapp.com",
+        databaseURL: "https://kavach-3b941-default-rtdb.firebaseio.com",
+        projectId: "kavach-3b941",
+        storageBucket: "kavach-3b941.appspot.com",
+        messagingSenderId: "198114377814",
+        appId: "1:198114377814:web:528e64ae9be10f9c43fbf7"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var ref = firebase.database().ref();
+    let a = 0
+    btn.addEventListener('click', () => {
+
+        ref.on("value", function (snapshot) {
+            console.log(snapshot.val());
+            var arr = []
+            arr = snapshot.val();
+            for (let i in arr.Data) {
+                if (arr.Data[i].pass == pass.value && arr.Data[i].uname == uname.value) {
+                    alert("hi pass" + a)
+                    setTimeout(() => {
+                        // console.log("Delayed for 1 second.");
+                    }, "2000");
+                    window.location.href = "./device.html";
+
+                }
+            }
+        });
+    })
+
+</script>
+
+</html>
