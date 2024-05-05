@@ -147,7 +147,7 @@
     btn.addEventListener('click', () => {
 
         ref.on("value", function (snapshot) {
-            console.log(snapshot.val());
+            console.log(snapshot.val(),"hi");
             var arr = []
             arr = snapshot.val();
             for (let i in arr.Data) {
